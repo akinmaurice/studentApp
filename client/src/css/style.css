@@ -1,0 +1,170 @@
+body {
+    padding-top: 55px;
+    font-family: Karla;
+    background: #000;
+    color: #ccc !important;
+}
+
+.navbar-dark {
+/*background: linear-gradient(90deg, #a026bf, #e82c75);*/
+background-color: #000;
+}
+
+.navbar-brand {
+  color: #831010 !important;
+  font-family: "Panama";
+  letter-spacing: -1px;
+  word-spacing: 0px;
+  font-weight: 600;
+  font-style: normal;
+  font-variant: normal;
+  text-transform: none;
+  text-decoration: none;
+  text-indent: 0px;
+}
+
+.loadingSvg {
+  max-height: 40px;
+  min-height: 40px;
+  max-width: 40px;
+  min-width: 40px;
+  height: 40px;
+  width: 40px;
+}
+
+
+.navbar {
+  margin-bottom: 0;
+}
+
+.jumbotron {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  margin-bottom: 0;
+  background: #000;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+
+.card {
+  margin-bottom: 20px;
+  min-height: 250px;
+  height: 250px;
+  max-height: 250px;
+  background-image: url('./bg.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #000;
+}
+
+footer p {
+  font-size: 10px;
+  color: #a026bf;
+  font-family: 'panama';
+}
+
+.btn-warning {
+  color: #000 !important;
+}
+
+.searchInput {
+  border-radius: 25px;
+  font-size: 14px;
+}
+
+.btn-app {
+  font-size: 13px;
+  background: #831010;
+  color: #000000 !important;
+  margin: 5px;
+}
+
+.breadcrumb {
+  background-color: #564d4d;
+  font-size: 13px;
+}
+
+.active {
+  color: #000000 !important;
+}
+
+.breadcrumb a {
+  color: #000000;
+}
+.breadcrumb a:hover {
+  color: #000000;
+}
+
+.movieTitle{
+  color: #831010;
+  font-family: "Panama";
+}
+
+.movieOverview {
+  font-size: 14px;
+  color: #564d4d;
+}
+
+.movieYear {
+  font-size: 10px;
+}
+
+.jumboButton {
+    font-size: 16px;
+    background: #831010;
+    color: #000000 !important;
+    margin: 5px;
+}
+
+.trailer {
+  margin: 5px;
+}
+
+.btn-grey {
+  font-size: 10px;
+  background: #564d4d;
+  color: #000000 !important;
+  margin: 5px;
+}
+
+.badge-dark {
+  color: #fff;
+}
+
+.fa-circle-o-notch {
+  color: #831010 !important;
+}
+
+@font-face {
+  font-family: 'panama';
+  src: url("./fonts/panama-bold-webfont.woff2") format("woff2"), url("./fonts/panama-bold-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.homeFont {
+  font-family: "Panama";
+  font-size: 30px;
+  line-height: 57.5px;
+  letter-spacing: -1px;
+  word-spacing: 0px;
+  font-weight: 600;
+  font-style: normal;
+  font-variant: normal;
+  text-transform: none;
+  text-decoration: none;
+  text-indent: 0px;
+  color: #564d4d;
+}
+
+.homeText {
+font-size: 15px;
+color: #564d4d;
+font-family: "Panama";
+}
+.badge {
+  font-size: 12px;
+}
