@@ -28,7 +28,6 @@ class Student extends Component {
   }
 
   render() {
-    console.log(this.props.student)
     let view = <div />;
     if( this.props.isError) {
       view = (

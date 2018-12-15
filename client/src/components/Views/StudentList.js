@@ -3,7 +3,6 @@ import StudentCard from './StudentCard';
 
 
 const StudentList = (props) => {
-  console.log(props)
   const { students } = props;
   let view = <p />;
   if (students.length >= 1) {
