@@ -31,6 +31,7 @@ const StudentList = (props) => {
                 <th scope="col" className="text-center">Last Name</th>
                 <th scope="col" className="text-center">Date of Birth</th>
                 <th scope="col" className="text-center">Email</th>
+                <th scope="col" className="text-center"></th>
               </tr>
             </thead>
             <tbody>

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import Header from './Views/Header';
 import StudentList from './Views/StudentList';
 import { fetchStudents } from '../actions/index';
@@ -28,7 +27,6 @@ class Students extends Component {
   }
 
   render() {
-    console.log(this.props.students)
     let view = <div />;
     if( this.props.isError) {
       view = (

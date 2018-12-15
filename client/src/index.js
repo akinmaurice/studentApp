@@ -28,7 +28,7 @@ const Root = () => (
       <Switch>
         <Route path="/" exact component={App} />
         <Route path="/students" exact component={Students} />
-        <Route path="/student" exact component={Student} />
+        <Route path="/student/:student_id" exact component={Student} />
         <Route path="/create" exact component={CreateStudent} />
         <Route component={NotFound} />
       </Switch>
