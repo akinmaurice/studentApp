@@ -7,14 +7,15 @@
 
 body {
     padding-top: 80px;
-    font-family: panama;
     background: #FFF;
+    font-family: karla;
     color: #000 !important;
     font-size: 13px;
 }
 
 .navbar-dark {
-background: linear-gradient(90deg,#e44d26,#f16529);
+  background: linear-gradient(90deg,#e44d26,#f16529);
+  font-family: panama;
 }
 
 .navbar-brand {
@@ -104,34 +105,6 @@ background: linear-gradient(90deg,#e44d26,#f16529);
 
 .btn-hacker-new {
   background-color: #e44d26;
-}
-
-.link-card {
-  margin:5px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
-.link-card__head {
-  font-size: 12px;
-  color: #000 !important;
-}
-
-.link-card__foot {
-  font-size: 10px;
-}
-
-.search-input {
-  border-radius: 25px;
-  font-size: 12px;
-}
-
-.create-news-form-input {
-  font-size: 12px;
-}
-
-.auth-form-text {
-  font-size: 11px;
+  color: #ffffff !important;
+  font-size: 13px;
 }

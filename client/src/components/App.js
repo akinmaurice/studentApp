@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Header from './Views/Header';
 
 class App extends Component {
@@ -9,7 +10,18 @@ class App extends Component {
         <div className="container text-center">
           <div className="row">
             <div className="col-lg-12">
-              <p>Hello</p>
+              <h4>
+                Student Management Application
+              </h4>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-lg-12">
+              <br />
+              <Link to="/students" className="btn btn-hacker-new btn-xs">View Students</Link>
+              <br />
+              <br />
+              <Link to="/new" className="btn btn-hacker-new btn-xs">Add Student</Link>
             </div>
           </div>
         </div>
