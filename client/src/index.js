@@ -4,6 +4,9 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 
 import App from './components/App';
+import Students from './components/Students';
+import Student from './components/Student';
+import CreateStudent from './components/CreateStudent';
 import NotFound from './components/NotFound';
 import * as serviceWorker from './serviceWorker';
 
@@ -18,6 +21,9 @@ const Root = () => (
     <div>
       <Switch>
         <Route path="/" exact component={App} />
+        <Route path="/students" exact component={Students} />
+        <Route path="/student" exact component={Student} />
+        <Route path="/create" exact component={CreateStudent} />
         <Route component={NotFound} />
       </Switch>
     </div>

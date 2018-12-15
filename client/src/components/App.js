@@ -21,7 +21,7 @@ class App extends Component {
               <Link to="/students" className="btn btn-hacker-new btn-xs">View Students</Link>
               <br />
               <br />
-              <Link to="/new" className="btn btn-hacker-new btn-xs">Add Student</Link>
+              <Link to="/create" className="btn btn-hacker-new btn-xs">Add Student</Link>
             </div>
           </div>
         </div>
