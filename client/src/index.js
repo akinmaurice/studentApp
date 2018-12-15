@@ -1,7 +1,10 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/es/integration/react';
 
+import { store, persistor } from './store';
 
 import App from './components/App';
 import Students from './components/Students';
@@ -17,6 +20,9 @@ import './css/style.css';
 
 
 const Root = () => (
+
+  <Provider store={store}>
+    <PersistGate persistor={persistor}>
   <Router>
     <div>
       <Switch>
@@ -28,6 +34,8 @@ const Root = () => (
       </Switch>
     </div>
   </Router>
+    </PersistGate>
+  </Provider>
 );
 
 
