@@ -132,6 +132,12 @@ class CreateStudent extends Component {
                     ref={(ref) => { this.hobbies = ref; }}
                     placeholder="Hobbies"
                   />
+                  <p>
+                    Insert a comma after each hobby. see below example.
+                  </p>
+                  <p>
+                    Swimming, Travelling, Eating
+                  </p>
                 </div>
                 <div className="form-group">
                   <input
