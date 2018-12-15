@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Header from './Views/Header';
 import { fetchStudent } from '../actions/index';
+import StudentView from './Views/StudentView';
 
 
 function mapStatetoProps(state) {
@@ -49,7 +49,7 @@ class Student extends Component {
           </div>
       );
     } else {
-      view = (<p>{this.props.student.first_name}</p>);
+      view = <StudentView details={this.props.student} ></StudentView>
     }
     return (
       <div>
@@ -57,9 +57,9 @@ class Student extends Component {
         <div className="container text-center">
           <div className="row">
             <div className="col-lg-12">
-              <h6>
+              <h5>
                 Student Card
-              </h6>
+              </h5>
             </div>
           </div>
           {view}

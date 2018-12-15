@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import StudentCard from './StudentCard';
 
 
@@ -11,14 +10,11 @@ const StudentList = (props) => {
     view = Object.keys(students).map(student => <StudentCard key={student} details={students[student]} />);
   } else if (students.length < 1) {
     view = (
-      <div>
-        <p className="text-danger">
-          Current no student.
-        </p>
-        <Link to="/create" className="btn btn-sm btn-warning">
-          Create Student
-        </Link>
-      </div>
+        <tr className="text-danger text-center">
+          <td colSpan="5">
+            Currently no student.
+          </td>
+        </tr>
     );
   }
   return (

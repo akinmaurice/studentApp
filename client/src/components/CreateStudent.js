@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import _ from 'lodash';
@@ -19,6 +18,13 @@ function mapStatetoProps(state) {
 
 
 class CreateStudent extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      hobbyList: []
+    };
+  }
+
    handleSubmit = e => {
     e.preventDefault();
         const data = new FormData();
