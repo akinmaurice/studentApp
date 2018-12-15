@@ -14,8 +14,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.15.2",
+    "aws-sdk": "^2.343.0",
     "bluebird": "^3.5.2",
+    "body-parser": "^1.15.2",
     "db-migrate-pg": "^0.4.0",
     "debug": "^2.6.0",
     "express": "^4.14.0",
@@ -24,6 +25,8 @@
     "helmet": "^3.3.0",
     "moment": "^2.22.2",
     "morgan": "^1.7.0",
+    "multer": "^1.3.1",
+    "multer-s3": "^2.7.0",
     "pg-promise": "^8.5.1",
     "q": "^1.5.1",
     "winston": "^2.3.0"

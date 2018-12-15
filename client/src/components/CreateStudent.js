@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import Header from './Views/Header';
@@ -15,42 +16,19 @@ function mapStatetoProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    fetchData: newStudent => dispatch(createStudent(newStudent)),
-  };
-}
 
 
 class CreateStudent extends Component {
-  state = {
-    first_name: '',
-    last_name: '',
-    date_of_birth: '',
-    email: '',
-    hobbies: '',
-    photo: ''
-   };
-
-   handleInputChange = e => {
-     this.setState({
-       [e.target.name]: e.target.value
-     });
-   };
-
-
    handleSubmit = e => {
     e.preventDefault();
-    if (this.state.first_name.trim() &&
-      this.state.last_name.trim() &&
-      this.state.email.trim() &&
-      this.state.hobbies.trim() &&
-      this.state.photo.trim() &&
-      this.state.date_of_birth.trim())
-      {
-        console.log(this.state);
-      this.props.fetchData(this.state);
-    };
+        const data = new FormData();
+        data.append('file', this.uploadInput.files[0]);
+        data.set('first_name', this.first_name.value);
+        data.set('last_name', this.last_name.value);
+        data.set('date_of_birth', this.date_of_birth.value);
+        data.set('email', this.email.value);
+        data.set('hobbies', this.hobbies.value);
+        this.props.createStudent(data);
    };
 
 
@@ -79,8 +57,8 @@ class CreateStudent extends Component {
         </div>
       );
     } else if(!_.isEmpty(this.props.student)) {
-      //view = <Redirect to={postUrl} />;
-      view = (<p>Hello</p>)
+      const studentUrl = `/student/${this.props.student.id}`
+      view = <Redirect to={studentUrl} />;
     }
     return (
       <div>
@@ -105,7 +83,7 @@ class CreateStudent extends Component {
                     name="first_name"
                     className="form-control create-news-form-input"
                     onChange={this.handleInputChange}
-                    value={ this.state.first_name}
+                    ref={(ref) => { this.first_name= ref; }}
                     placeholder="First Name"
                   />
                 </div>
@@ -115,7 +93,7 @@ class CreateStudent extends Component {
                     name="last_name"
                     className="form-control create-news-form-input"
                     onChange={this.handleInputChange}
-                    value={ this.state.last_name}
+                    ref={(ref) => { this.last_name = ref; }}
                     placeholder="Last Name"
                   />
                 </div>
@@ -125,7 +103,7 @@ class CreateStudent extends Component {
                     name="email"
                     className="form-control create-news-form-input"
                     onChange={this.handleInputChange}
-                    value={ this.state.email}
+                    ref={(ref) => { this.email = ref; }}
                     placeholder="Email Address"
                   />
                 </div>
@@ -135,7 +113,7 @@ class CreateStudent extends Component {
                     name="date_of_birth"
                     className="form-control create-news-form-input"
                     onChange={this.handleInputChange}
-                    value={ this.state.date_of_birth}
+                    ref={(ref) => { this.date_of_birth= ref; }}
                     placeholder="Date Of Birth YYYY-MM-DD"
                   />
                 </div>
@@ -145,17 +123,15 @@ class CreateStudent extends Component {
                     name="hobbies"
                     className="form-control create-news-form-input"
                     onChange={this.handleInputChange}
-                    value={ this.state.hobbies}
+                    ref={(ref) => { this.hobbies = ref; }}
                     placeholder="Hobbies"
                   />
                 </div>
                 <div className="form-group">
                   <input
                     type="file"
-                    name="photo"
+                    ref={(ref) => { this.uploadInput = ref; }}
                     className="form-control create-news-form-input"
-                    onChange={this.handleInputChange}
-                    value={ this.state.photo}
                   />
                 </div>
                 <div className="form-group">
@@ -177,4 +153,4 @@ class CreateStudent extends Component {
 }
 
 
-export default connect(mapStatetoProps, mapDispatchToProps)(CreateStudent);
+export default connect(mapStatetoProps, {createStudent})(CreateStudent);
