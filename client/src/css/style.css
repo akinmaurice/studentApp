@@ -1,143 +1,3 @@
-body {
-    padding-top: 55px;
-    font-family: Karla;
-    background: #000;
-    color: #ccc !important;
-}
-
-.navbar-dark {
-/*background: linear-gradient(90deg, #a026bf, #e82c75);*/
-background-color: #000;
-}
-
-.navbar-brand {
-  color: #831010 !important;
-  font-family: "Panama";
-  letter-spacing: -1px;
-  word-spacing: 0px;
-  font-weight: 600;
-  font-style: normal;
-  font-variant: normal;
-  text-transform: none;
-  text-decoration: none;
-  text-indent: 0px;
-}
-
-.loadingSvg {
-  max-height: 40px;
-  min-height: 40px;
-  max-width: 40px;
-  min-width: 40px;
-  height: 40px;
-  width: 40px;
-}
-
-
-.navbar {
-  margin-bottom: 0;
-}
-
-.jumbotron {
-  padding-top: 6rem;
-  padding-bottom: 6rem;
-  margin-bottom: 0;
-  background: #000;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-  border-top-right-radius: 0;
-  border-top-left-radius: 0;
-}
-
-
-.card {
-  margin-bottom: 20px;
-  min-height: 250px;
-  height: 250px;
-  max-height: 250px;
-  background-image: url('./bg.jpg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-color: #000;
-}
-
-footer p {
-  font-size: 10px;
-  color: #a026bf;
-  font-family: 'panama';
-}
-
-.btn-warning {
-  color: #000 !important;
-}
-
-.searchInput {
-  border-radius: 25px;
-  font-size: 14px;
-}
-
-.btn-app {
-  font-size: 13px;
-  background: #831010;
-  color: #000000 !important;
-  margin: 5px;
-}
-
-.breadcrumb {
-  background-color: #564d4d;
-  font-size: 13px;
-}
-
-.active {
-  color: #000000 !important;
-}
-
-.breadcrumb a {
-  color: #000000;
-}
-.breadcrumb a:hover {
-  color: #000000;
-}
-
-.movieTitle{
-  color: #831010;
-  font-family: "Panama";
-}
-
-.movieOverview {
-  font-size: 14px;
-  color: #564d4d;
-}
-
-.movieYear {
-  font-size: 10px;
-}
-
-.jumboButton {
-    font-size: 16px;
-    background: #831010;
-    color: #000000 !important;
-    margin: 5px;
-}
-
-.trailer {
-  margin: 5px;
-}
-
-.btn-grey {
-  font-size: 10px;
-  background: #564d4d;
-  color: #000000 !important;
-  margin: 5px;
-}
-
-.badge-dark {
-  color: #fff;
-}
-
-.fa-circle-o-notch {
-  color: #831010 !important;
-}
-
 @font-face {
   font-family: 'panama';
   src: url("./fonts/panama-bold-webfont.woff2") format("woff2"), url("./fonts/panama-bold-webfont.woff") format("woff");
@@ -145,10 +5,21 @@ footer p {
   font-style: normal;
 }
 
-.homeFont {
+body {
+    padding-top: 80px;
+    font-family: panama;
+    background: #FFF;
+    color: #000 !important;
+    font-size: 13px;
+}
+
+.navbar-dark {
+background: linear-gradient(90deg,#e44d26,#f16529);
+}
+
+.navbar-brand {
+  color: #000 !important;
   font-family: "Panama";
-  font-size: 30px;
-  line-height: 57.5px;
   letter-spacing: -1px;
   word-spacing: 0px;
   font-weight: 600;
@@ -157,14 +28,110 @@ footer p {
   text-transform: none;
   text-decoration: none;
   text-indent: 0px;
-  color: #564d4d;
 }
 
-.homeText {
-font-size: 15px;
-color: #564d4d;
-font-family: "Panama";
+.navbar {
+  margin-bottom: 0;
 }
-.badge {
+
+.headTitle {
+  color: #e44d26 !important;
+}
+
+
+.round {
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+  line-height: 30px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+  background-color: #000;
+  color: #e82c75 !important;
+}
+.round.round-lg {
+  height: 40px;
+  width: 40px;
+  line-height: 40px;
+  border-radius: 20px;
+  -moz-border-radius: 20px;
+  font-size: 1.5em;
+}
+
+.nav-link__color {
+  color: #000 !important;
+}
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+
+.form-signin .checkbox {
+  font-weight: normal;
+}
+
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 10px;
+  font-size: 13px;
+}
+
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.btn-hacker-new {
+  background-color: #e44d26;
+}
+
+.link-card {
+  margin:5px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.link-card__head {
   font-size: 12px;
+  color: #000 !important;
+}
+
+.link-card__foot {
+  font-size: 10px;
+}
+
+.search-input {
+  border-radius: 25px;
+  font-size: 12px;
+}
+
+.create-news-form-input {
+  font-size: 12px;
+}
+
+.auth-form-text {
+  font-size: 11px;
 }
