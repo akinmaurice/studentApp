@@ -75,7 +75,6 @@ const saveStudent = async(body) => {
         let { hobbies } = body;
         hobbies = hobbies.toString();
         hobbies = hobbies.split(',');
-        console.log(hobbies);
         const student = await db.one(
             query.createStudent,
             [
@@ -91,7 +90,7 @@ const saveStudent = async(body) => {
         );
         defer.resolve(student);
     } catch (e) {
-        console.log('Add-Student-Error', e, {
+        logger.error('Add-Student-Error', e, {
             serviceName: config.serviceName
         });
         defer.reject({
