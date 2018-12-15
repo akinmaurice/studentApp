@@ -37,7 +37,7 @@ describe('It validates all Functions to Create a Student', () => {
             last_name: 'User',
             date_of_birth: '1991-06-29',
             email: 'akin@gmail.com',
-            hobbies: [ 'Swimming', 'Football', 'Travelling' ]
+            hobbies: 'Swimming, Football, Travelling'
         };
         const checkRequest = createStudent.__get__('checkRequest');
         const response = await checkRequest(request);
@@ -74,7 +74,7 @@ describe('It validates all Functions to Create a Student', () => {
             last_name: 'User',
             date_of_birth: '1991-06-29',
             email: 'akin@gmail.com',
-            hobbies: [ 'Swimming', 'Football', 'Travelling' ],
+            hobbies: 'Swimming, Football, Travelling',
             photoUrl: 'https://s3.come/image/jsj.jpg'
         };
         const student = {
