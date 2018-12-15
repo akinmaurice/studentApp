@@ -1,0 +1,14 @@
+{
+	"dev": {
+		"ENV": "STUDENT_DEV_DATABASE_URL"
+  },
+	"staging": {
+		"ENV": "STUDENT_STAGING_DATABASE_URL"
+	},
+	"test": {
+		"ENV": "STUDENT_TEST_DATABASE_URL"
+	},
+	"prod": {
+		"ENV": "STUDENT_PROD_DATABASE_URL"
+	}
+}
