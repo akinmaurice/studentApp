@@ -6,6 +6,10 @@ import expressConfig from './config/express';
 const port = process.env.PORT || 3023;
 const app = express();
 
+
+app.use(express.static('public'));
+
+
 expressConfig(app);
 
 app.listen(port);
