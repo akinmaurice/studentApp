@@ -29,13 +29,13 @@ services:
         container_name: client-service
         environment:
             - NODE_ENV=development
-            - PORT=3023
+            - API_BASE_URL=http://api-service:3023
         restart: always
         build: ./client
         depends_on:
             - api-service
-        ports:
-            - "3000:3000"
+        expose:
+            - "3000"
     nginx:
         container_name: nginx
         image: nginx
