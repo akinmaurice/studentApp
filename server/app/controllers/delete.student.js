@@ -29,7 +29,6 @@ const getStudent = async(student_id) => {
 
 
 const removeStudentFromDB = async(student_id) => {
-    console.log(student_id);
     const defer = Q.defer();
     try {
         await db.none(
