@@ -13,11 +13,18 @@ const StudentView= (props) => {
   } else {
     hobbyView = (<li className="list-group-item">Vestibulum at eros</li>)
   }
+  const newTo = {
+    pathname: studentUrl,
+    first_name: details.first_name,
+    last_name: details.last_name,
+    date_of_birth: moment(details.date_of_birth).format('YYYY-MM-DD'),
+    hobbies: details.hobbies
+  }
   return (
           <div className="row">
             <div className="col-lg-3"></div>
             <div className="col-lg-6">
-            <Link to={studentUrl}>Edit Student</Link>
+            <Link to={newTo}>Edit Student</Link>
               <div className="card">
                 <img className="card-img-top" src={details.photo_url} alt="Card" />
                   <div className="card-body">

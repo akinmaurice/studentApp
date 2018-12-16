@@ -65,10 +65,10 @@ export function createStudent(state = {}, action) {
 }
 
 
-export function editStudent(state = {}, action) {
+export function newStudent(state = false, action) {
   switch (action.type) {
     case FETCH_EDIT_STUDENT_SUCCESS:
-      return action.editStudent;
+      return action.newStudent;
     default:
       return state;
   }

@@ -2,17 +2,15 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import _ from 'lodash';
 import Header from './Views/Header';
 
-import { resetState, fetchStudent, editStudent } from '../actions/index';
+import { resetState, editStudent } from '../actions/index';
 
 
 
 function mapStatetoProps(state) {
   return {
-    student: state.student,
-    editStudent: state.editStudent,
+    newStudent: state.newStudent,
     isError: state.isError,
     isLoading: state.IsLoading,
     errorMessage: state.errorMessage
@@ -23,22 +21,17 @@ function mapStatetoProps(state) {
 
 class EditStudent extends Component {
   state = {
-    updatedStudent: false,
-    errMsg: ''
-  }
-  componentWillMount() {
-    this.props.resetState();
+    noStudent: false,
   }
 
 
   componentDidMount() {
-    const { student_id } = this.props.match.params;
-    this.props.fetchStudent(student_id);
-  }
-
-
-  componentWillUnmount(){
     this.props.resetState();
+    if(!this.props.location.first_name) {
+      this.setState({
+        noStudent: true
+      })
+    }
   }
 
 
@@ -50,10 +43,10 @@ class EditStudent extends Component {
           let date_of_birth = this.date_of_birth.value;
           let hobbies = this.hobbies.value;
           if(!first_name.trim()) {
-            first_name = this.props.student.first_name
+            first_name = this.props.location.first_name
           };
           if(!last_name.trim()) {
-            last_name = this.props.student.last_name
+            last_name = this.props.location.last_name
           };
           console.log(moment(date_of_birth).isBefore());
           if(moment(date_of_birth).isBefore()){
@@ -62,10 +55,10 @@ class EditStudent extends Component {
                 });
           }
           if(!date_of_birth.trim()) {
-            date_of_birth = moment(this.props.student.date_of_birth).format('YYYY-MM-DD')
+            date_of_birth = moment(this.props.location.date_of_birth).format('YYYY-MM-DD')
           };
           if(!hobbies.trim()) {
-            hobbies = this.props.student.hobbies.toString();
+            hobbies = this.props.location.hobbies.toString();
           };
           const payload = {
             first_name,
@@ -74,23 +67,18 @@ class EditStudent extends Component {
             hobbies
           };
         this.props.editStudent(student_id, payload);
-        this.setState({
-          updatedStudent: true,
-        })
    };
 
 
   render() {
-    console.log(this.props.isError)
-    console.log(this.errorMessage);
+    console.log(this.props)
+    const { student_id } = this.props.match.params;
+    const newUrl = `/student/${student_id}`
     let view = <div />;
-    if(this.state.errMsg !== '') {
-        view = (<p>{this.state.errMsg}</p>)
+
+    if(this.state.noStudent) {
+      view = (<Redirect to="/students"/>);
     }
-    if(this.state.updatedStudent) {
-      const studentUrl = `/student/${this.props.student.id}`;
-      view = (<Redirect to={studentUrl}/>);
-    };
     if( this.props.isError) {
       view = (
         <div className="container text-center">
@@ -102,7 +90,7 @@ class EditStudent extends Component {
           </div>
         </div>
       );
-    } else if ( this.props.isLoading) {
+    } else if (this.props.isLoading) {
       view = (
         <div className="container text-center">
           <div className="row">
@@ -113,6 +101,8 @@ class EditStudent extends Component {
           </div>
         </div>
       );
+      } else if(this.props.newStudent) {
+        view = (<Redirect to={newUrl} />)
       }
     return (
       <div>
@@ -138,7 +128,7 @@ class EditStudent extends Component {
                     className="form-control create-news-form-input"
                     onChange={this.handleInputChange}
                     ref={(ref) => { this.first_name= ref; }}
-                    placeholder={this.props.student.first_name}
+                    placeholder={this.props.location.first_name}
                   />
                 </div>
                 <div className="form-group">
@@ -148,7 +138,7 @@ class EditStudent extends Component {
                     className="form-control create-news-form-input"
                     onChange={this.handleInputChange}
                     ref={(ref) => { this.last_name = ref; }}
-                    placeholder={this.props.student.last_name}
+                    placeholder={this.props.location.last_name}
                   />
                 </div>
                 <div className="form-group">
@@ -158,7 +148,7 @@ class EditStudent extends Component {
                     className="form-control create-news-form-input"
                     onChange={this.handleInputChange}
                     ref={(ref) => { this.date_of_birth= ref; }}
-                    placeholder={moment(this.props.student.date_of_birth).format('YYYY-MM-DD')}
+                    placeholder={moment(this.props.location.date_of_birth).format('YYYY-MM-DD')}
                   />
                 </div>
                 <div className="form-group">
@@ -168,7 +158,7 @@ class EditStudent extends Component {
                     className="form-control create-news-form-input"
                     onChange={this.handleInputChange}
                     ref={(ref) => { this.hobbies = ref; }}
-                    placeholder={this.props.student.hobbies}
+                    placeholder={this.props.location.hobbies}
                   />
                   <p>
                     Insert a comma after each hobby. see below example.
@@ -196,4 +186,4 @@ class EditStudent extends Component {
 }
 
 
-export default connect(mapStatetoProps, { resetState, fetchStudent, editStudent})(EditStudent);
+export default connect(mapStatetoProps, { resetState, editStudent})(EditStudent);

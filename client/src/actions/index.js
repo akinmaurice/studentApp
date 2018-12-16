@@ -60,10 +60,10 @@ export const fetchStudentSuccess = (student) => {
 };
 
 
-export const fetchEditStudentSuccess = (editStudent) => {
+export const fetchEditStudentSuccess = (bool) => {
   return {
     type: FETCH_EDIT_STUDENT_SUCCESS,
-    editStudent
+    newStudent: bool
   }
 };
 
@@ -127,11 +127,10 @@ export const editStudent = (student_id, payload) => {
   return (dispatch) => {
     dispatch(isError(false));
     dispatch(isLoading(true));
+    dispatch(fetchEditStudentSuccess(false));
     axios.put(`${baseApiUrl}/students/${student_id}`, payload)
-    .then((response) => {
-      const { data } = response;
-      const { student } = data;
-      dispatch(fetchEditStudentSuccess(student));
+    .then(() => {
+      dispatch(fetchEditStudentSuccess(true));
     })
     .catch((e) => {
       dispatch(isError(true));
@@ -147,5 +146,6 @@ export function resetState() {
     dispatch(isLoading(false));
     dispatch(createStudentSuccess({}));
     dispatch(fetchStudentSuccess({}));
+    dispatch(fetchEditStudentSuccess(false));
   };
 }
