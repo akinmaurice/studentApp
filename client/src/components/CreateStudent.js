@@ -21,7 +21,8 @@ class CreateStudent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      hobbyList: []
+      hobbyList: [],
+      inputError: ''
     };
   }
 
@@ -32,6 +33,42 @@ class CreateStudent extends Component {
 
    handleSubmit = e => {
     e.preventDefault();
+        if(!this.first_name.value) {
+            this.setState({
+              inputError: 'Please provide a first name'
+            })
+            return;
+        }
+        if(!this.last_name.value) {
+          this.setState({
+            inputError: 'Please provide a last name'
+          })
+          return;
+        }
+        if(!this.email.value) {
+        this.setState({
+          inputError: 'Please provide a valid email address'
+        })
+        return;
+      }
+      if(!this.date_of_birth.value) {
+      this.setState({
+        inputError: 'Please provide a valid date of birth'
+      })
+      return;
+      }
+      if(!this.hobbies.value) {
+      this.setState({
+        inputError: 'Please provide some hobbies'
+      })
+      return;
+      }
+      if(!this.uploadInput.files[0]) {
+        this.setState({
+          inputError: 'Please upload an image'
+        })
+      return;
+      }
         const data = new FormData();
         data.append('file', this.uploadInput.files[0]);
         data.set('first_name', this.first_name.value);
@@ -45,6 +82,10 @@ class CreateStudent extends Component {
 
   render() {
     let view = <div />;
+    let inputError = (<p></p>);
+    if(this.state.inputError !== '') {
+      inputError = (<p className="text-danger">{this.state.inputError}</p>)
+    }
     if( this.props.isError) {
       view = (
         <div className="container text-center">
@@ -157,6 +198,9 @@ class CreateStudent extends Component {
                   >
                   Create Student
                   </button>
+                </div>
+                <div className="form-group">
+                 {inputError}
                 </div>
               </form>
               {view}
