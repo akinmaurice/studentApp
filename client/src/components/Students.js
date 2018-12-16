@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from './Views/Header';
 import StudentList from './Views/StudentList';
-import { fetchStudents } from '../actions/index';
+import { fetchStudents, resetState } from '../actions/index';
 
 
 function mapStatetoProps(state) {
@@ -16,12 +16,14 @@ function mapStatetoProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     fetchData: () => dispatch(fetchStudents()),
+    resetState: () => dispatch(resetState()),
   };
 }
 
 
 
 class Students extends Component {
+
   componentDidMount() {
     this.props.fetchData();
   }

@@ -10,6 +10,7 @@ import App from './components/App';
 import Students from './components/Students';
 import Student from './components/Student';
 import CreateStudent from './components/CreateStudent';
+import EditStudent from './components/EditStudent';
 import NotFound from './components/NotFound';
 import * as serviceWorker from './serviceWorker';
 
@@ -30,6 +31,7 @@ const Root = () => (
         <Route path="/students" exact component={Students} />
         <Route path="/student/:student_id" exact component={Student} />
         <Route path="/create" exact component={CreateStudent} />
+        <Route path="/student/:student_id/edit" exact component={EditStudent} />
         <Route component={NotFound} />
       </Switch>
     </div>

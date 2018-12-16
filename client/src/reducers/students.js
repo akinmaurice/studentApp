@@ -2,6 +2,7 @@ import {
   FETCH_STUDENTS_SUCCESS,
   FETCH_STUDENT_SUCCESS,
   CREATE_STUDENT_SUCCESS,
+  FETCH_EDIT_STUDENT_SUCCESS,
   IS_LOADING,
   IS_ERROR,
   ERROR_MESSAGE
@@ -58,6 +59,16 @@ export function createStudent(state = {}, action) {
   switch (action.type) {
     case CREATE_STUDENT_SUCCESS:
       return action.student;
+    default:
+      return state;
+  }
+}
+
+
+export function editStudent(state = {}, action) {
+  switch (action.type) {
+    case FETCH_EDIT_STUDENT_SUCCESS:
+      return action.editStudent;
     default:
       return state;
   }

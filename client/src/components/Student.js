@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from './Views/Header';
-import { fetchStudent } from '../actions/index';
+import { fetchStudent, resetState } from '../actions/index';
 import StudentView from './Views/StudentView';
 
 
@@ -16,15 +16,24 @@ function mapStatetoProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     fetchData: student_id => dispatch(fetchStudent(student_id)),
+    resetState: () => dispatch(resetState())
   };
 }
 
 
 
 class Student extends Component {
+
+  componentWillMount() {
+  this.props.resetState();
+}
   componentDidMount() {
     const { student_id } = this.props.match.params;
     this.props.fetchData(student_id);
+  }
+
+  componentWillUnmount(){
+    this.props.resetState();
   }
 
   render() {

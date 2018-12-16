@@ -16,6 +16,9 @@ const checkRequest = (body) => {
             'hobbies'
         ]);
         if (error) {
+            logger.warn('Validate-Student-Error', error, {
+                serviceName: config.serviceName
+            });
             defer.reject({
                 code: 400,
                 msg: error
@@ -65,9 +68,11 @@ const updateStudentData = async(body, student_id) => {
     try {
         const {
             first_name, last_name,
-            date_of_birth, photo_url,
-            hobbies
+            date_of_birth
         } = body;
+        let { hobbies } = body;
+        hobbies = hobbies.toString();
+        hobbies = hobbies.split(',');
         await db.none(
             query.updateStudent,
             [
@@ -75,7 +80,6 @@ const updateStudentData = async(body, student_id) => {
                 last_name,
                 date_of_birth,
                 JSON.stringify(hobbies),
-                photo_url,
                 moment(),
                 student_id
             ]

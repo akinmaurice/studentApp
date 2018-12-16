@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import Header from './Views/Header';
-import { createStudent, resetState } from '../actions/index';
+
+import { resetState, fetchStudent, editStudent } from '../actions/index';
+
 
 
 function mapStatetoProps(state) {
   return {
-    student: state.createStudent,
+    student: state.student,
+    editStudent: state.editStudent,
     isError: state.isError,
     isLoading: state.IsLoading,
     errorMessage: state.errorMessage
@@ -17,41 +21,83 @@ function mapStatetoProps(state) {
 
 
 
-class CreateStudent extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      hobbyList: []
-    };
+class EditStudent extends Component {
+  state = {
+    updatedStudent: false,
+    errMsg: ''
   }
-
   componentWillMount() {
     this.props.resetState();
   }
 
 
-   handleSubmit = e => {
+  componentDidMount() {
+    const { student_id } = this.props.match.params;
+    this.props.fetchStudent(student_id);
+  }
+
+
+  componentWillUnmount(){
+    this.props.resetState();
+  }
+
+
+  handleSubmit = e => {
     e.preventDefault();
-        const data = new FormData();
-        data.append('file', this.uploadInput.files[0]);
-        data.set('first_name', this.first_name.value);
-        data.set('last_name', this.last_name.value);
-        data.set('date_of_birth', this.date_of_birth.value);
-        data.set('email', this.email.value);
-        data.set('hobbies', this.hobbies.value);
-        this.props.createStudent(data);
+        const { student_id } = this.props.match.params;
+          let first_name = this.first_name.value;
+          let last_name = this.last_name.value;
+          let date_of_birth = this.date_of_birth.value;
+          let hobbies = this.hobbies.value;
+          if(!first_name.trim()) {
+            first_name = this.props.student.first_name
+          };
+          if(!last_name.trim()) {
+            last_name = this.props.student.last_name
+          };
+          console.log(moment(date_of_birth).isBefore());
+          if(moment(date_of_birth).isBefore()){
+                this.setState({
+                  errMsg: 'Hahahah',
+                });
+          }
+          if(!date_of_birth.trim()) {
+            date_of_birth = moment(this.props.student.date_of_birth).format('YYYY-MM-DD')
+          };
+          if(!hobbies.trim()) {
+            hobbies = this.props.student.hobbies.toString();
+          };
+          const payload = {
+            first_name,
+            last_name,
+            date_of_birth,
+            hobbies
+          };
+        this.props.editStudent(student_id, payload);
+        this.setState({
+          updatedStudent: true,
+        })
    };
 
 
   render() {
+    console.log(this.props.isError)
+    console.log(this.errorMessage);
     let view = <div />;
+    if(this.state.errMsg !== '') {
+        view = (<p>{this.state.errMsg}</p>)
+    }
+    if(this.state.updatedStudent) {
+      const studentUrl = `/student/${this.props.student.id}`;
+      view = (<Redirect to={studentUrl}/>);
+    };
     if( this.props.isError) {
       view = (
         <div className="container text-center">
           <div className="row">
             <div className="col-lg-12 text-danger">
               <br />
-              {this.props.errorMessage.error || 'There was an Error creating new Student'}
+              {this.props.errorMessage.error || 'Oops! Something went wrong'}
             </div>
           </div>
         </div>
@@ -67,10 +113,7 @@ class CreateStudent extends Component {
           </div>
         </div>
       );
-    } else if(!_.isEmpty(this.props.student)) {
-      const studentUrl = `/student/${this.props.student.id}`
-      view = <Redirect to={studentUrl} />;
-    }
+      }
     return (
       <div>
         <Header />
@@ -78,7 +121,7 @@ class CreateStudent extends Component {
           <div className="row">
             <div className="col-lg-12">
               <h4>
-                Create Student
+                Update Student
               </h4>
               <br />
               <br />
@@ -95,7 +138,7 @@ class CreateStudent extends Component {
                     className="form-control create-news-form-input"
                     onChange={this.handleInputChange}
                     ref={(ref) => { this.first_name= ref; }}
-                    placeholder="First Name"
+                    placeholder={this.props.student.first_name}
                   />
                 </div>
                 <div className="form-group">
@@ -105,17 +148,7 @@ class CreateStudent extends Component {
                     className="form-control create-news-form-input"
                     onChange={this.handleInputChange}
                     ref={(ref) => { this.last_name = ref; }}
-                    placeholder="Last Name"
-                  />
-                </div>
-                <div className="form-group">
-                  <input
-                    type="email"
-                    name="email"
-                    className="form-control create-news-form-input"
-                    onChange={this.handleInputChange}
-                    ref={(ref) => { this.email = ref; }}
-                    placeholder="Email Address"
+                    placeholder={this.props.student.last_name}
                   />
                 </div>
                 <div className="form-group">
@@ -125,7 +158,7 @@ class CreateStudent extends Component {
                     className="form-control create-news-form-input"
                     onChange={this.handleInputChange}
                     ref={(ref) => { this.date_of_birth= ref; }}
-                    placeholder="Date Of Birth YYYY-MM-DD"
+                    placeholder={moment(this.props.student.date_of_birth).format('YYYY-MM-DD')}
                   />
                 </div>
                 <div className="form-group">
@@ -135,7 +168,7 @@ class CreateStudent extends Component {
                     className="form-control create-news-form-input"
                     onChange={this.handleInputChange}
                     ref={(ref) => { this.hobbies = ref; }}
-                    placeholder="Hobbies"
+                    placeholder={this.props.student.hobbies}
                   />
                   <p>
                     Insert a comma after each hobby. see below example.
@@ -145,17 +178,10 @@ class CreateStudent extends Component {
                   </p>
                 </div>
                 <div className="form-group">
-                  <input
-                    type="file"
-                    ref={(ref) => { this.uploadInput = ref; }}
-                    className="form-control create-news-form-input"
-                  />
-                </div>
-                <div className="form-group">
                   <button
                     className="btn btn-hacker-new btn-block create-news-form-input"
                   >
-                  Create Student
+                  Update Student
                   </button>
                 </div>
               </form>
@@ -170,4 +196,4 @@ class CreateStudent extends Component {
 }
 
 
-export default connect(mapStatetoProps, {createStudent, resetState})(CreateStudent);
+export default connect(mapStatetoProps, { resetState, fetchStudent, editStudent})(EditStudent);

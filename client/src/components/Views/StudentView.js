@@ -1,10 +1,12 @@
 import React from 'react';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 import Hobbies from './utils/Hobbies';
 
 const StudentView= (props) => {
   const { details } = props;
   const { hobbies } = details;
+  const studentUrl = `/student/${details.id}/edit`;
   let hobbyView = <p />;
   if( hobbies && hobbies.length >= 1) {
     hobbyView = Object.keys(hobbies).map(hobby => <Hobbies key={hobby} details={hobbies[hobby]} />);
@@ -15,6 +17,7 @@ const StudentView= (props) => {
           <div className="row">
             <div className="col-lg-3"></div>
             <div className="col-lg-6">
+            <Link to={studentUrl}>Edit Student</Link>
               <div className="card">
                 <img className="card-img-top" src={details.photo_url} alt="Card" />
                   <div className="card-body">

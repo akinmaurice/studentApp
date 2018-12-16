@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-import { isError, isLoading, students, student, createStudent, errorMessage } from './students';
+import { isError, isLoading, students, student, createStudent, errorMessage, editStudent } from './students';
 
 export default combineReducers({
   isError,
@@ -8,5 +8,6 @@ export default combineReducers({
   students,
   student,
   createStudent,
-  errorMessage
+  errorMessage,
+  editStudent
 });

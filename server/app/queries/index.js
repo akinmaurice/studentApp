@@ -11,10 +11,9 @@ const queries = {
             last_name = $2,
             date_of_birth = $3,
             hobbies = $4,
-            photo_url = $5,
-            updated_at = $6
+            updated_at = $5
         WHERE
-            id = $7
+            id = $6
    `,
     getAllStudents: `
         SELECT

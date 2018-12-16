@@ -3,6 +3,7 @@ import {
   FETCH_STUDENTS_SUCCESS,
   FETCH_STUDENT_SUCCESS,
   CREATE_STUDENT_SUCCESS,
+  FETCH_EDIT_STUDENT_SUCCESS,
   IS_LOADING,
   IS_ERROR,
   ERROR_MESSAGE
@@ -59,6 +60,14 @@ export const fetchStudentSuccess = (student) => {
 };
 
 
+export const fetchEditStudentSuccess = (editStudent) => {
+  return {
+    type: FETCH_EDIT_STUDENT_SUCCESS,
+    editStudent
+  }
+};
+
+
 export const fetchStudents = () => {
   return (dispatch) => {
     dispatch(isError(false));
@@ -87,8 +96,9 @@ export const fetchStudent = (student_id) => {
       const { student } = data;
       dispatch(fetchStudentSuccess(student));
     })
-    .catch(() => {
+    .catch((e) => {
       dispatch(isError(true));
+      dispatch(errorMessage(e.response.data));
     });
   };
 };
@@ -110,3 +120,32 @@ export const createStudent = (payload) => {
     });
   };
 };
+
+
+
+export const editStudent = (student_id, payload) => {
+  return (dispatch) => {
+    dispatch(isError(false));
+    dispatch(isLoading(true));
+    axios.put(`${baseApiUrl}/students/${student_id}`, payload)
+    .then((response) => {
+      const { data } = response;
+      const { student } = data;
+      dispatch(fetchEditStudentSuccess(student));
+    })
+    .catch((e) => {
+      dispatch(isError(true));
+      dispatch(errorMessage(e.response.data));
+    });
+  };
+};
+
+
+export function resetState() {
+  return (dispatch) => {
+    dispatch(isError(false));
+    dispatch(isLoading(false));
+    dispatch(createStudentSuccess({}));
+    dispatch(fetchStudentSuccess({}));
+  };
+}
