@@ -9,7 +9,10 @@ const getStudent = async(student_id) => {
     try {
         const student = await db.oneOrNone(query.getStudentById, [ student_id ]);
         if (!student) {
-            defer.reject('No student with that id');
+            defer.reject({
+                code: 400,
+                msg: 'Could not find that student'
+            });
         }
         defer.resolve(student);
     } catch (e) {
@@ -26,6 +29,7 @@ const getStudent = async(student_id) => {
 
 
 const removeStudentFromDB = async(student_id) => {
+    console.log(student_id);
     const defer = Q.defer();
     try {
         await db.none(
@@ -53,7 +57,7 @@ async function deleteStudent(req, res) {
         const { params } = req;
         const { student_id } = params;
         await getStudent(student_id);
-        const student = await removeStudentFromDB(params);
+        const student = await removeStudentFromDB(student_id);
         res.status(200).json({
             student
         });

@@ -108,3 +108,15 @@ body {
   color: #ffffff !important;
   font-size: 13px;
 }
+
+.btn-edit-student {
+  background-color: #32CD32;
+  color: #ffffff !important;
+  font-size: 13px;
+}
+
+.btn-delete-student {
+  background-color: #CC0000;
+  color: #ffffff !important;
+  font-size: 13px;
+}

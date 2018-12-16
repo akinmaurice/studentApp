@@ -6,15 +6,23 @@ import Hobbies from './utils/Hobbies';
 const StudentView= (props) => {
   const { details } = props;
   const { hobbies } = details;
-  const studentUrl = `/student/${details.id}/edit`;
+  const studentEditUrl = `/student/${details.id}/edit`;
+  const studentDeleteUrl = `/student/${details.id}/delete`;
   let hobbyView = <p />;
   if( hobbies && hobbies.length >= 1) {
     hobbyView = Object.keys(hobbies).map(hobby => <Hobbies key={hobby} details={hobbies[hobby]} />);
   } else {
     hobbyView = (<li className="list-group-item">Vestibulum at eros</li>)
   }
-  const newTo = {
-    pathname: studentUrl,
+  const editTo = {
+    pathname: studentEditUrl,
+    first_name: details.first_name,
+    last_name: details.last_name,
+    date_of_birth: moment(details.date_of_birth).format('YYYY-MM-DD'),
+    hobbies: details.hobbies
+  }
+  const deleteTo = {
+    pathname: studentDeleteUrl,
     first_name: details.first_name,
     last_name: details.last_name,
     date_of_birth: moment(details.date_of_birth).format('YYYY-MM-DD'),
@@ -24,7 +32,12 @@ const StudentView= (props) => {
           <div className="row">
             <div className="col-lg-3"></div>
             <div className="col-lg-6">
-            <Link to={newTo}>Edit Student</Link>
+                  <Link to={editTo} className="btn btn-edit-student btn-xs">Edit Student</Link>
+                  <br />
+                  <br />
+                  <Link to={deleteTo} className="btn btn-delete-student btn-xs">Delete Student</Link>
+                  <br />
+                  <br />
               <div className="card">
                 <img className="card-img-top" src={details.photo_url} alt="Card" />
                   <div className="card-body">

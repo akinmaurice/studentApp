@@ -4,6 +4,7 @@ import {
   FETCH_STUDENT_SUCCESS,
   CREATE_STUDENT_SUCCESS,
   FETCH_EDIT_STUDENT_SUCCESS,
+  DELETE_STUDENT_SUCCESS,
   IS_LOADING,
   IS_ERROR,
   ERROR_MESSAGE
@@ -66,6 +67,14 @@ export const fetchEditStudentSuccess = (bool) => {
     newStudent: bool
   }
 };
+
+
+export const deleteStudentSuccess = (bool) => {
+  return {
+    type: DELETE_STUDENT_SUCCESS,
+    deletedStudent: bool
+  }
+}
 
 
 export const fetchStudents = () => {
@@ -140,6 +149,24 @@ export const editStudent = (student_id, payload) => {
 };
 
 
+export const deleteStudent = (student_id) => {
+  return (dispatch) => {
+    dispatch(isError(false));
+    dispatch(isLoading(true));
+    dispatch(fetchEditStudentSuccess(false));
+    axios.delete(`${baseApiUrl}/students/${student_id}`)
+    .then(() => {
+      dispatch(deleteStudentSuccess(true));
+    })
+    .catch((e) => {
+      dispatch(isError(true));
+      dispatch(errorMessage(e.response.data));
+    });
+  };
+};
+
+
+
 export function resetState() {
   return (dispatch) => {
     dispatch(isError(false));
@@ -147,5 +174,6 @@ export function resetState() {
     dispatch(createStudentSuccess({}));
     dispatch(fetchStudentSuccess({}));
     dispatch(fetchEditStudentSuccess(false));
+    dispatch(deleteStudentSuccess(false));
   };
 }

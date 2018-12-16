@@ -3,6 +3,7 @@ import {
   FETCH_STUDENT_SUCCESS,
   CREATE_STUDENT_SUCCESS,
   FETCH_EDIT_STUDENT_SUCCESS,
+  DELETE_STUDENT_SUCCESS,
   IS_LOADING,
   IS_ERROR,
   ERROR_MESSAGE
@@ -71,5 +72,15 @@ export function newStudent(state = false, action) {
       return action.newStudent;
     default:
       return state;
+  }
+}
+
+
+export function deletedStudent(state = false, action) {
+  switch (action.type) {
+    case DELETE_STUDENT_SUCCESS:
+    return action.deletedStudent;
+    default:
+    return state;
   }
 }
