@@ -1,4 +1,5 @@
 import axios from 'axios';
+import config from '../config';
 import {
   FETCH_STUDENTS_SUCCESS,
   FETCH_STUDENT_SUCCESS,
@@ -10,7 +11,7 @@ import {
   ERROR_MESSAGE
 } from './types';
 
-const baseApiUrl = 'http://localhost:3023/v1';
+const baseApiUrl = `${config.baseUrl}/v1`;
 
 
 export const isLoading = (bool) => {

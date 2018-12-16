@@ -2,6 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 import Hobbies from './utils/Hobbies';
+import config from '../../config';
 
 const StudentView= (props) => {
   const { details } = props;
@@ -39,7 +40,7 @@ const StudentView= (props) => {
                   <br />
                   <br />
               <div className="card">
-                <img className="card-img-top" src={details.photo_url} alt="Card" />
+                <img className="card-img-top" src={`${config.baseUrl}/images/${details.photo_url}`} alt="Card" />
                   <div className="card-body">
                     <h4 className="card-title">{details.first_name} {details.last_name}</h4>
                       <p className="card-text">{details.email}</p>

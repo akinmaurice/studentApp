@@ -1,6 +1,5 @@
 import express from 'express';
 import multer from 'multer';
-import multerS3 from 'multer-s3';
 
 import createStudent from '../controllers/add.student';
 import getStudents from '../controllers/get.students';
@@ -8,28 +7,12 @@ import getStudent from '../controllers/get.student';
 import updateStudent from '../controllers/update.student';
 import deleteStudent from '../controllers/delete.student';
 
-import config from '../../config';
 
-
-const AWS = require('aws-sdk');
-
-AWS.config.update({
-    accessKeyId: config.AWS_ACCESS_KEY,
-    secretAccessKey: config.AWS_SECRET_ACCESS_KEY,
-    region: config.AWS_REGION
-});
-
-const s3 = new AWS.S3();
-
-
-const storage = multerS3({
-    s3,
-    bucket: config.AWS_BUCKET,
-    acl: 'public-read',
-    metadata(req, file, cb) {
-        cb(null, { fieldName: file.fieldname });
+const storage = multer.diskStorage({
+    destination(req, file, cb) {
+        cb(null, 'public/images');
     },
-    key(req, file, cb) {
+    filename(req, file, cb) {
         const filename = file.originalname;
         const arr = filename.split('.');
         cb(null, `${Date.now().toString()}.${arr[arr.length - 1]}`);
@@ -61,8 +44,8 @@ router.post(
         }
         const { file } = req;
         const meta = req.body;
-        req.body.photo_url = file.location;
-        logger.info('Image Uploaded! Available Here:', file.location);
+        req.body.photo_url = req.file.filename;
+        logger.info('Image Uploaded! Available Here:', req.file.filename);
         next();
     },
     createStudent

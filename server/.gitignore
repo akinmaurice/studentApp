@@ -2,6 +2,9 @@
 npm-debug.log
 node_modules/
 coverage/
+*.jpg
+*.jpeg
+*.png
 checkstyle-result.xml
 *.log
 *.env

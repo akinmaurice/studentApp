@@ -71,7 +71,6 @@ class EditStudent extends Component {
 
 
   render() {
-    console.log(this.props)
     const { student_id } = this.props.match.params;
     const newUrl = `/student/${student_id}`
     let view = <div />;
