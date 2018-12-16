@@ -1,0 +1,49 @@
+version: "3.3"
+services:
+    student-service-db:
+        container_name: student-service-db
+        image: postgres:latest
+        environment:
+            - POSTGRES_PASSWORD=student_db_pass
+            - POSTGRES_USER=akin
+            - POSTGRES_DB=student_db
+        restart: always
+        expose:
+            - "5432"
+        volumes:
+            - ./DB/student-db.sql:/docker-entrypoint-initdb.d/student-db.sql
+    api-service:
+        container_name: api-service
+        environment:
+            - NODE_ENV=development
+            - STUDENT_SERVICE_DEV_DATABASE_URL=postgres://akin:student_db_pass@student-service-db:5432/student_db
+        restart: always
+        build: ./server
+        links:
+            - student-service-db
+        depends_on:
+            - student-service-db
+        expose:
+            - "3023"
+    client-service:
+        container_name: client-service
+        environment:
+            - NODE_ENV=development
+            - PORT=3023
+        restart: always
+        build: ./client
+        depends_on:
+            - api-service
+        ports:
+            - "3000:3000"
+    nginx:
+        container_name: nginx
+        image: nginx
+        volumes:
+            - ./nginx.conf:/etc/nginx/conf.d/nginx.conf
+        ports:
+            - "80:80"
+            - "443:443"
+        depends_on:
+            - client-service
+        command: /bin/bash -c "envsubst < /etc/nginx/conf.d/nginx.conf > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
