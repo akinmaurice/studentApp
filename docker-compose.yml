@@ -29,7 +29,7 @@ services:
         container_name: client-service
         environment:
             - NODE_ENV=development
-            - API_BASE_URL=http://api-service:3023
+            - REACT_APP_API_BASE_URL=http://api-service:3023
         restart: always
         build: ./client
         depends_on:

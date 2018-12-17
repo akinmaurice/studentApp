@@ -1,5 +1,5 @@
 const config = {
-    baseUrl: 'http://api-service:3023'
+    baseUrl: process.env.REACT_APP_API_BASE_URL
 };
 
 export default config;
