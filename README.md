@@ -5,9 +5,11 @@ Simple Node JS React JS Student Management Application.
 ## Getting Started
 
 
-Please ensure Docker is installed.
+Please ensure Docker and Docker Compose are installed.
 
 You can get Docker [Here](https://www.docker.com/get-docker)
+
+You can get Docker Compose [Here](https://docs.docker.com/compose/install/)
 
 ```
 
