@@ -30,6 +30,7 @@ class CreateStudent extends Component {
     this.props.resetState();
   }
 
+
   processNewStudent () {
     const data = new FormData();
     data.append('file', this.uploadInput.files[0]);
@@ -56,15 +57,17 @@ class CreateStudent extends Component {
           })
           return;
         }
-        if(!this.email.value) {
+        const emailTest = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
+        if(emailTest.test(this.email.value.toLowerCase())) {
         this.setState({
           inputError: 'Please provide a valid email address'
         })
         return;
       }
-      if(!this.date_of_birth.value) {
+      const dateTest = /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/
+      if(dateTest.test(this.date_of_birth.value)) {
       this.setState({
-        inputError: 'Please provide a valid date of birth'
+        inputError: 'Please provide a date of birth'
       })
       return;
       }
