@@ -30,6 +30,17 @@ class CreateStudent extends Component {
     this.props.resetState();
   }
 
+  processNewStudent () {
+    const data = new FormData();
+    data.append('file', this.uploadInput.files[0]);
+    data.set('first_name', this.first_name.value);
+    data.set('last_name', this.last_name.value);
+    data.set('date_of_birth', this.date_of_birth.value);
+    data.set('email', this.email.value);
+    data.set('hobbies', this.hobbies.value);
+    this.props.createStudent(data);
+  }
+
 
    handleSubmit = e => {
     e.preventDefault();
@@ -69,14 +80,7 @@ class CreateStudent extends Component {
         })
       return;
       }
-        const data = new FormData();
-        data.append('file', this.uploadInput.files[0]);
-        data.set('first_name', this.first_name.value);
-        data.set('last_name', this.last_name.value);
-        data.set('date_of_birth', this.date_of_birth.value);
-        data.set('email', this.email.value);
-        data.set('hobbies', this.hobbies.value);
-        this.props.createStudent(data);
+      this.processNewStudent();
    };
 
 

@@ -1,5 +1,5 @@
 const config = {
-    baseUrl: process.env.API_BASE_URL
+    baseUrl: 'http://api-service:3023'
 };
 
 export default config;
