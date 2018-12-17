@@ -57,15 +57,13 @@ class CreateStudent extends Component {
           })
           return;
         }
-        const emailTest = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
-        if(emailTest.test(this.email.value.toLowerCase())) {
+        if(!this.email.value) {
         this.setState({
           inputError: 'Please provide a valid email address'
         })
         return;
       }
-      const dateTest = /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/
-      if(dateTest.test(this.date_of_birth.value)) {
+      if(!this.date_of_birth.value) {
       this.setState({
         inputError: 'Please provide a date of birth'
       })

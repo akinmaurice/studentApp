@@ -16,22 +16,24 @@ services:
         container_name: api-service
         environment:
             - NODE_ENV=development
-            - STUDENT_SERVICE_DEV_DATABASE_URL=postgres://akin:student_db_pass@student-service-db:5432/student_db
+            - PORT=3069
+            - STUDENT_DATABASE_DEV_URL=postgres://akin:student_db_pass@student-service-db:5432/student_db
         restart: always
         build: ./server
         links:
             - student-service-db
         depends_on:
             - student-service-db
-        expose:
-            - "3023"
+        ports:
+            - "3069:3069"
     client-service:
         container_name: client-service
         environment:
-            - NODE_ENV=development
-            - REACT_APP_API_BASE_URL=http://api-service:3023
+            - REACT_APP_API_BASE_URL=http://localhost:3069
         restart: always
         build: ./client
+        links:
+            - api-service
         depends_on:
             - api-service
         expose:
