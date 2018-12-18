@@ -15,7 +15,12 @@ const storage = multer.diskStorage({
     filename(req, file, cb) {
         const filename = file.originalname;
         const arr = filename.split('.');
-        cb(null, `${Date.now().toString()}.${arr[arr.length - 1]}`);
+        const fileExt = arr[arr.length - 1];
+        if (fileExt !== 'jpg' && fileExt !== 'jpeg' && fileExt !== 'png' && fileExt !== 'gif') {
+            cb('only jpeg, jpg, png or gif files allowed');
+        } else {
+            cb(null, `${Date.now().toString()}.${arr[arr.length - 1]}`);
+        }
     }
 });
 
@@ -35,18 +40,24 @@ router.get(
 router.post(
     '/students',
     upload.single('file'), (req, res, next) => {
-        if (!req.file) {
-            logger.error('Could not upload image');
+        try {
+            if (!req.file) {
+                logger.error('Could not upload image');
+                res.status(400).json({
+                    message: 'Could not Upload Image'
+                });
+                return;
+            }
+            const { file } = req;
+            const meta = req.body;
+            req.body.photo_url = req.file.filename;
+            logger.info('Image Uploaded! Available Here:', req.file.filename);
+            next();
+        } catch (e) {
             res.status(400).json({
-                message: 'Could not Upload Image'
+                error: e
             });
-            return;
         }
-        const { file } = req;
-        const meta = req.body;
-        req.body.photo_url = req.file.filename;
-        logger.info('Image Uploaded! Available Here:', req.file.filename);
-        next();
     },
     createStudent
 );
