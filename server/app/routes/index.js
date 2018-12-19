@@ -51,7 +51,6 @@ router.post(
             const { file } = req;
             const meta = req.body;
             req.body.photo_url = req.file.filename;
-            logger.info('Image Uploaded! Available Here:', req.file.filename);
             next();
         } catch (e) {
             res.status(400).json({
