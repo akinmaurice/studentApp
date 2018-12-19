@@ -30,6 +30,7 @@ const Root = () => (
       <Switch>
         <Route path="/" exact component={App} />
         <Route path="/students" exact component={Students} />
+        <Route path="/students/:page" exact component={Students} />
         <Route path="/student/:student_id" exact component={Student} />
         <Route path="/create" exact component={CreateStudent} />
         <Route path="/student/:student_id/edit" exact component={EditStudent} />

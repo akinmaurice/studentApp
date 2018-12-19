@@ -37,7 +37,7 @@ export function isLoading(state = false, action) {
   }
 }
 
-export function students(state = [], action) {
+export function students(state = {}, action) {
   switch (action.type) {
     case FETCH_STUDENTS_SUCCESS:
       return action.students;

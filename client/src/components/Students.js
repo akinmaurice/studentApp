@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Header from './Views/Header';
 import StudentList from './Views/StudentList';
 import { fetchStudents, resetState } from '../actions/index';
+import Pagination from './Views/Pagination';
 
 
 function mapStatetoProps(state) {
@@ -15,7 +16,7 @@ function mapStatetoProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchData: () => dispatch(fetchStudents()),
+    fetchData: page => dispatch(fetchStudents(page)),
     resetState: () => dispatch(resetState()),
   };
 }
@@ -25,11 +26,13 @@ function mapDispatchToProps(dispatch) {
 class Students extends Component {
 
   componentDidMount() {
-    this.props.fetchData();
+    const page = this.props.match.params.page || 1;
+      this.props.fetchData(page);
   }
 
   render() {
     let view = <div />;
+    let paginatedView = <div />;
     if( this.props.isError) {
       view = (
           <div className="row">
@@ -50,6 +53,9 @@ class Students extends Component {
       );
     } else {
       view = <StudentList students={this.props.students} />;
+      if(this.props.students.page_count > 1) {
+        paginatedView = <Pagination pageCount={this.props.students.page_count} />
+      }
     }
     return (
       <div>
@@ -63,6 +69,11 @@ class Students extends Component {
             </div>
           </div>
           {view}
+          <div className="row text-center">
+            <div className="col-lg-12">
+              {paginatedView}
+            </div>
+          </div>
         </div>
       </div>
     );

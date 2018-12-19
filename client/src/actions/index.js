@@ -78,16 +78,15 @@ export const deleteStudentSuccess = (bool) => {
 }
 
 
-export const fetchStudents = () => {
+export const fetchStudents = (page) => {
   return (dispatch) => {
     dispatch(isError(false));
     dispatch(isLoading(true));
-    axios.get(`${baseApiUrl}/students`)
-    .then((response) => {
-      const { data } = response;
-      const { students_data } = data;
-      const { students } = students_data;
-      dispatch(fetchStudentsSuccess(students));
+    const pageNumber = page || 1;
+    axios.get(`${baseApiUrl}/students/page/${pageNumber}`)
+    .then((result) => {
+      const {  data : { students_data } } = result;
+      dispatch(fetchStudentsSuccess(students_data));
     })
     .catch(() => {
       dispatch(isError(true));
@@ -102,8 +101,7 @@ export const fetchStudent = (student_id) => {
     dispatch(isLoading(true));
     axios.get(`${baseApiUrl}/students/${student_id}`)
     .then((response) => {
-      const { data } = response;
-      const { student } = data;
+      const { data: { student } } = response;
       dispatch(fetchStudentSuccess(student));
     })
     .catch((e) => {
@@ -120,8 +118,7 @@ export const createStudent = (payload) => {
     dispatch(isLoading(true));
     axios.post(`${baseApiUrl}/students`, payload)
     .then((response) => {
-      const { data } = response;
-      const { student } = data;
+      const { data: { student } } = response;
       dispatch(createStudentSuccess(student));
     })
     .catch((e) => {
@@ -172,6 +169,7 @@ export function resetState() {
   return (dispatch) => {
     dispatch(isError(false));
     dispatch(isLoading(false));
+    dispatch(fetchStudentsSuccess({}));
     dispatch(createStudentSuccess({}));
     dispatch(fetchStudentSuccess({}));
     dispatch(fetchEditStudentSuccess(false));

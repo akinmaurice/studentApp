@@ -4,10 +4,11 @@ import StudentCard from './StudentCard';
 
 const StudentList = (props) => {
   const { students } = props;
+  const studentsList = students.students;
   let view = <p />;
-  if (students.length >= 1) {
-    view = Object.keys(students).map(student => <StudentCard key={student} details={students[student]} />);
-  } else if (students.length < 1) {
+  if (studentsList && studentsList.length >= 1) {
+    view = Object.keys(studentsList).map(student => <StudentCard key={student} details={studentsList[student]} />);
+  } else if (studentsList && studentsList.length < 1) {
     view = (
         <tr className="text-danger text-center">
           <td colSpan="5">
