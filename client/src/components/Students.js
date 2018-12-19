@@ -30,6 +30,13 @@ class Students extends Component {
       this.props.fetchData(page);
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if(this.props.match.params.page !== prevProps.match.params.page) {
+      const { page } = this.props.match.params;
+      this.props.fetchData(page);
+    }
+  }
+
   render() {
     let view = <div />;
     let paginatedView = <div />;

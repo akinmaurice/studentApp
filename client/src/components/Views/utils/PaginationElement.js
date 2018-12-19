@@ -1,13 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const PaginationElement = (props) => {
   const { pageNumber } = props;
   const url = `/students/${pageNumber}`;
   return (
           <li className="page-item">
-            <a href={url} className="page-link">
+            <Link to={url} className="page-link">
               {pageNumber}
-            </a>
+            </Link>
           </li>
   );
 };
