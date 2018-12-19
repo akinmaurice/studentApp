@@ -9,7 +9,7 @@ const extend = (util)._extend;
 const defaults = {
     root: path.normalize(`${__dirname}/..`),
     serviceName: 'Student Service',
-    paginationLimit: '50'
+    paginationLimit: 50
 };
 
 const environment = {
