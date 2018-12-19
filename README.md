@@ -28,6 +28,7 @@ The above will get you a copy of the project up and running on your local machin
 
 ```
   1. Docker
+  2. Docker Compose
 ```
 
 
